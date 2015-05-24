@@ -14,6 +14,6 @@ public interface EquipoService {
 
 	@GET
 	@Path("lista")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	List<Equipo> getListaEquipos();
 }
