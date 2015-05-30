@@ -8,6 +8,5 @@ public class Service {
 	
 	public Service() {
 		dataProvider = DataProvider.getInstance();
-		int a = 3;
 	}
 }

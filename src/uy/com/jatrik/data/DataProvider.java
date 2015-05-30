@@ -3,6 +3,7 @@ package uy.com.jatrik.data;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import uy.com.jatrik.entities.Equipo;
@@ -22,10 +23,10 @@ public class DataProvider {
 	
 	private void initData() {
 		
-		Equipo e1 = createEquipo("Peniarol", "/images/1.jpg", LocalDateTime.of(1913, 12, 15, 5, 15));
-		Equipo e2 = createEquipo("Nacional", "/images/2.jpg", LocalDateTime.of(1899, 12, 15, 5, 15));
-		Equipo e3 = createEquipo("Cerro", "/images/3.jpg", LocalDateTime.of(1922, 12, 15, 5, 15));
-		Equipo e4 = createEquipo("Defensor", "/images/4.jpg", LocalDateTime.of(1913, 3, 15, 5, 15));
+		Equipo e1 = createEquipo((long)1,"Peniarol", "/images/1.jpg", LocalDateTime.of(1913, 12, 15, 5, 15).toString());
+		Equipo e2 = createEquipo((long)2,"Nacional", "/images/2.jpg", LocalDateTime.of(1899, 12, 15, 5, 15).toString());
+		Equipo e3 = createEquipo((long)3,"Cerro", "/images/3.jpg", LocalDateTime.of(1922, 12, 15, 5, 15).toString());
+		Equipo e4 = createEquipo((long)4,"Defensor", "/images/4.jpg", LocalDateTime.of(1913, 3, 15, 5, 15).toString());
 		
 		List<Equipo> equipos = Arrays.asList(e1,e2,e3,e4);
 		
@@ -40,7 +41,7 @@ public class DataProvider {
 				}
 				int edad = Dado.tirar(18, 35);
 				e.addJugador(createJugador(DiccionarioNombres.randomNombre() + " " + DiccionarioNombres.randomApellido(), 
-							 edad, LocalDateTime.now().minusYears(edad), e));
+							 edad, LocalDateTime.now().minusYears(edad).toString(), e));
 				cont++;
 			}
 			jugadoresSistema.addAll(e.getJugadores());
@@ -56,11 +57,11 @@ public class DataProvider {
 		return instance;
 	}
 	
-	private Equipo createEquipo(String nombre, String urlImage, LocalDateTime fechaCreacion) {
-		return new Equipo(nombre,urlImage,fechaCreacion);
+	private Equipo createEquipo(Long id, String nombre, String urlImage, String fechaCreacion) {
+		return new Equipo(id, nombre,urlImage,fechaCreacion);
 	}
 	
-	private Jugador createJugador(String nombre, int edad, LocalDateTime fechaNacimiento, Equipo equipo) { 
+	private Jugador createJugador(String nombre, int edad, String fechaNacimiento, Equipo equipo) { 
 		
 		Jugador jugador = new Jugador(nombre,edad,fechaNacimiento, /*equipo,*/ "Uruguay");
 		
@@ -85,4 +86,17 @@ public class DataProvider {
 	public List<Jugador> getAllJugadores() {
 		return this.jugadoresSistema;
 	}
+	
+	public List<Jugador> getJugadoresEquipo(Long id) {
+		final Long idFinal = id;
+		Equipo equipo = equiposSistema.stream()
+				.filter(e->e.getId()
+						.equals(idFinal))
+						.findFirst()
+						.orElse(null);
+		
+		return equipo == null ? Collections.emptyList() : equipo.getJugadores();
+		
+	}
+				
 }

@@ -1,7 +1,6 @@
 package uy.com.jatrik.entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,18 +14,19 @@ public class Equipo implements Serializable{
 	private Long id;
 	private String nombre;
 	private String urlImage;
-	private LocalDateTime fechaCreacion;
+	private String fechaCreacion;
 	private List<Jugador> jugadores;
 	
 	public Equipo() { 
 		jugadores = new ArrayList<>();
 	} 
 	
-	public Equipo(String nombre, String urlImage, LocalDateTime fechaCreacion) {
+	public Equipo(Long id, String nombre, String urlImage, String fechaCreacion) {
 		jugadores = new ArrayList<>();
 		this.nombre = nombre;
 		this.urlImage = urlImage;
 		this.fechaCreacion = fechaCreacion;
+		this.id = id;
 	}
 	
 	public Long getId() {
@@ -49,10 +49,10 @@ public class Equipo implements Serializable{
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
-	public LocalDateTime getFechaCreacion() {
+	public String getFechaCreacion() {
 		return fechaCreacion;
 	}
-	public void setFechaCreacion(LocalDateTime fechaCreacion) {
+	public void setFechaCreacion(String fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 

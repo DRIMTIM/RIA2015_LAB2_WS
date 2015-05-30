@@ -1,7 +1,6 @@
 package uy.com.jatrik.entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,7 +12,7 @@ public class Jugador implements Serializable{
 	private Long id;
 	private String nombre;
 	private Integer edad;
-	private LocalDateTime fechaNacimiento;
+	private String fechaNacimiento;
 	//private Equipo equipo;
 	private String nacionalidad;
 	
@@ -26,7 +25,7 @@ public class Jugador implements Serializable{
 	private Integer faltas;
 	private Integer amarillas;
 
-	public Jugador(String nombre, int edad, LocalDateTime fechaNacimiento, /*Equipo equipo,*/ String nacionalidad) {
+	public Jugador(String nombre, int edad, String fechaNacimiento, /*Equipo equipo,*/ String nacionalidad) {
 		this.nombre = nombre;
 		this.edad = edad;
 		this.fechaNacimiento = fechaNacimiento;
@@ -66,10 +65,10 @@ public class Jugador implements Serializable{
 	public void setEdad(Integer edad) {
 		this.edad = edad;
 	}
-	public LocalDateTime getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 //	public Equipo getEquipo() {

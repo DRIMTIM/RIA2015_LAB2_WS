@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import uy.com.jatrik.entities.Equipo;
+import uy.com.jatrik.entities.Jugador;
 
 
 public interface EquipoService {
@@ -16,4 +18,9 @@ public interface EquipoService {
 	@Path("lista")
 	@Produces(MediaType.APPLICATION_JSON)
 	List<Equipo> getListaEquipos();
+	
+	@GET
+	@Path("detalle/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	List<Jugador> getJugadoresEquipo(@PathParam(value = "id") Long id);
 }
