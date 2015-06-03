@@ -25,4 +25,10 @@ public class EquipoServiceImpl extends Service implements EquipoService {
 		return dataProvider.getJugadoresEquipo(id);
 	}
 
+	@Override
+	public List<Equipo> getJugadoresEquipoPorNombre(String nombre) {
+		return dataProvider.getEquiposPorNom(nombre);
+	}
+
+	
 }

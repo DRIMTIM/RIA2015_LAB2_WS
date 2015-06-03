@@ -13,8 +13,9 @@ public class DataProvider {
 
 	private List<Equipo> equiposSistema = new ArrayList<>();
 	private List<Jugador> jugadoresSistema = new ArrayList<>();
+	private List<String> posicionesJugadoresSistema;
 	private static DataProvider instance;
-	
+	private static final String URL_IMAGEN_PATH = "/images/jugadores/{id}.jpg";
 	
 	private DataProvider() {
 		equiposSistema = new ArrayList<>();
@@ -23,25 +24,34 @@ public class DataProvider {
 	
 	private void initData() {
 		
-		Equipo e1 = createEquipo((long)1,"Peniarol", "/images/1.jpg", LocalDateTime.of(1913, 12, 15, 5, 15).toString());
-		Equipo e2 = createEquipo((long)2,"Nacional", "/images/2.jpg", LocalDateTime.of(1899, 12, 15, 5, 15).toString());
-		Equipo e3 = createEquipo((long)3,"Cerro", "/images/3.jpg", LocalDateTime.of(1922, 12, 15, 5, 15).toString());
-		Equipo e4 = createEquipo((long)4,"Defensor", "/images/4.jpg", LocalDateTime.of(1913, 3, 15, 5, 15).toString());
+		Equipo e1 = createEquipo((long)1,"Peniarol", "/images/equipos/1.jpg", LocalDateTime.of(1913, 12, 15, 5, 15).toString());
+		Equipo e2 = createEquipo((long)2,"Nacional", "/images/equipos/2.jpg", LocalDateTime.of(1899, 12, 15, 5, 15).toString());
+		Equipo e3 = createEquipo((long)3,"Cerro", "/images/equipos/3.jpg", LocalDateTime.of(1922, 12, 15, 5, 15).toString());
+		Equipo e4 = createEquipo((long)4,"Defensor", "/images/equipos/4.jpg", LocalDateTime.of(1913, 3, 15, 5, 15).toString());
+		
+		long generatedJugadorId = 0L;
 		
 		List<Equipo> equipos = Arrays.asList(e1,e2,e3,e4);
+		
+		this.posicionesJugadoresSistema = generarPosiciones();
 		
 		for(Equipo e : equipos ) {
 			
 			boolean salir = false;
-			int cont = 1;
+			int cont = 0;
 			
 			while(!salir) {
-				if(cont > 11) {
+				
+				if(cont > 9) {
 					salir = true;
 				}
-				int edad = Dado.tirar(18, 35);
-				e.addJugador(createJugador(DiccionarioNombres.randomNombre() + " " + DiccionarioNombres.randomApellido(), 
-							 edad, LocalDateTime.now().minusYears(edad).toString(), e));
+				
+				String posicion = posicionesJugadoresSistema.get(cont);
+				String urlImagen = URL_IMAGEN_PATH.replace("{id}", String.valueOf(generatedJugadorId));
+				
+				e.addJugador(createJugador(generatedJugadorId, DiccionarioNombres.randomNombre() + " " + DiccionarioNombres.randomApellido(), 
+							 	e, posicion, urlImagen));
+				generatedJugadorId++;
 				cont++;
 			}
 			jugadoresSistema.addAll(e.getJugadores());
@@ -61,23 +71,42 @@ public class DataProvider {
 		return new Equipo(id, nombre,urlImage,fechaCreacion);
 	}
 	
-	private Jugador createJugador(String nombre, int edad, String fechaNacimiento, Equipo equipo) { 
+	private Jugador createJugador(Long id, String nombre, Equipo equipo, String posicion, String urlImagen) { 
 		
-		Jugador jugador = new Jugador(nombre,edad,fechaNacimiento, /*equipo,*/ "Uruguay");
-		
-		int ataque = Dado.tirar(0, 100);
-		int defensa = Dado.tirar(0, 100);
-		int porteria = Dado.tirar(0, 100);
+		Jugador jugador = new Jugador(id, nombre, "Uruguay", posicion, urlImagen);
 		
 		int goles = Dado.tirar(0, 20);
 		int rojas = Dado.tirar(0, 1);
 		int faltas = Dado.tirar(0, 10);
 		int amarillas = Dado.tirar(0, 2);
+		int edad = Dado.tirar(18,35);
 		
-		jugador.buildEstadisticas(ataque, defensa, porteria, goles, rojas, faltas, amarillas);
+		jugador.buildDatosComplementarios(goles, rojas, faltas, amarillas, edad);
 		
 		return jugador;
 	}
+	
+	public List<String> generarPosiciones() {
+		
+		List<String> result = new ArrayList<>();
+
+		result.add("PosicionJugador.PORTERO");
+		result.add("Defensor");
+		result.add("Defensor");
+		result.add("Defensor");
+		result.add("Defensor");
+		result.add("Mediocampista");
+		result.add("Mediocampista");
+		result.add("Mediocampista");
+		result.add("Mediocampista");
+		result.add("Delantero");
+		result.add("Delantero");
+		
+		return result;
+	
+	}
+		
+	/*Funciones para los services*/
 	
 	public List<Equipo> getAllEquipos() {
 		return this.equiposSistema;
@@ -143,5 +172,5 @@ public class DataProvider {
 		return equipos.isEmpty() ? Collections.emptyList() : equipos;
 		
 	}	
-				
+	
 }

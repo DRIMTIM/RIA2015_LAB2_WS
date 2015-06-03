@@ -23,4 +23,9 @@ public interface EquipoService {
 	@Path("detalle/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	List<Jugador> getJugadoresEquipo(@PathParam(value = "id") Long id);
+	
+	@GET
+	@Path("{equipo}")
+	@Produces(MediaType.APPLICATION_JSON)
+	List<Equipo> getJugadoresEquipoPorNombre(@PathParam(value = "equipo") String nombre);
 }
