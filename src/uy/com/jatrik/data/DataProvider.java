@@ -98,5 +98,50 @@ public class DataProvider {
 		return equipo == null ? Collections.emptyList() : equipo.getJugadores();
 		
 	}
+	
+	public Equipo getEquipo(Long id) {
+		
+		final Long idFinal = id;
+		Equipo equipo = equiposSistema.stream()
+				.filter(e->e.getId()
+						.equals(idFinal))
+						.findFirst()
+						.orElse(null);
+		
+		return equipo == null ? null : equipo;
+		
+	}
+	
+	public Equipo getEquipo(String nombre) {
+		
+		final String nomFinal = nombre;
+		Equipo equipo = equiposSistema.stream()
+				.filter(e->e.getId()
+						.equals(nomFinal))
+						.findFirst()
+						.orElse(null);
+		
+		return equipo == null ? null : equipo;
+		
+	}	
+	
+	public List<Equipo> getEquiposPorNom(String nombre) {
+		
+		final String nomFinal = nombre;
+		List<Equipo> equipos = new ArrayList<Equipo>();
+		
+		for(Equipo e : equiposSistema){
+			
+			if(e.getNombre().contains(nomFinal)){
+				
+				equipos.add(e);
+				
+			}
+			
+		}
+		
+		return equipos.isEmpty() ? Collections.emptyList() : equipos;
+		
+	}	
 				
 }
