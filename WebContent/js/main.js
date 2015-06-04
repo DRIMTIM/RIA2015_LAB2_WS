@@ -51,7 +51,7 @@ function findByName(searchKey) {
 	console.log('findByName: ' + searchKey);
 	$.ajax({
 		type: 'GET',
-		url: rootURL + '/detalle/' + searchKey,
+		url: rootURL + '/' + searchKey,
 		dataType: "json",
 		success: renderList 
 	});
@@ -75,14 +75,42 @@ function findById(id) {
 function renderList(data) {
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
 	var list = data;
+	console.log("Lista de Equipos: ");
 	console.log(list);
-	//$('#wineList li').remove();
-	$.each(list.equipo, function(index, e) {
+
+	var tableFormat = 	"<thead>" +
+					      	"<tr>" +
+					        	"<th>Nombre</th>" +
+					        	"<th>Fundado</th>" +
+					        	"<th>Cant. Jugadores</th>" +
+					      	"</tr>" +
+					    "</thead>" +
+					    "<tbody></tbody>";
+
+	$('#tblEquipos').html(tableFormat);
+
+	if(list.equipo.length > 1){
+		$.each(list.equipo, function(index, e) {
+			console.log("Equipo " + index +": ");
 			console.log(e);
-		$('#tblEquipos')
-			.append('<tr><td><a href="#" data-identity="' + e.id + '">'+e.nombre+'</a></td>'
-					+ '<td>'+e.fechaCreacion+'</td><td>'+e.jugadores.length+'</td></tr>');
-	});
+			formatFecha(e.fechaCreacion);
+			$('#tblEquipos')
+				.append('<tr><td><a href="#" data-identity="' + e.id + '">' + e.nombre + '</a></td>'
+						+ '<td>' + formatFecha(e.fechaCreacion) + '</td><td>' + e.jugadores.length + '</td></tr>');
+		});
+	}else{
+
+		$.each(list, function(index, e) {
+			console.log("Equipo " + index +": ");
+			console.log(e);
+			$('#tblEquipos')
+				.append('<tr><td><a href="#" data-identity="' + e.id + '">' + e.nombre + '</a></td>'
+						+ '<td>' + e.fechaCreacion + '</td><td>' + e.jugadores.length + '</td></tr>');
+		});
+
+	}
+
+
 }
 
 function renderDetails(wine) {
@@ -109,4 +137,13 @@ function formToJSON() {
 		"picture": currentWine.picture,
 		"description": $('#description').val()
 		});
+}
+
+function formatFecha(fecha){
+
+	var fechaHora = fecha.split("T");
+	var f = fechaHora[0].split("-");
+	var fechaRet = f[2] + '/' + f[1] + '/' + f[0];
+	return fechaRet;
+
 }

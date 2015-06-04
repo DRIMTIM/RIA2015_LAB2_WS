@@ -30,10 +30,10 @@ public class EquipoServiceImpl extends Service implements EquipoService {
 		return dataProvider.getEquiposPorNom(key);
 	}	
 
-	@Override
-	public List<Equipo> getJugadoresEquipoPorNombre(String nombre) {
-		return dataProvider.getEquiposPorNom(nombre);
-	}
+//	@Override
+//	public List<Equipo> getJugadoresEquipoPorNombre(String nombre) {
+//		return dataProvider.getEquiposPorNom(nombre);
+//	}
 
 	
 }

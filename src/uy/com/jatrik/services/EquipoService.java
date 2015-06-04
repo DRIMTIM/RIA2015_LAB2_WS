@@ -25,12 +25,12 @@ public interface EquipoService {
 	List<Jugador> getJugadoresEquipo(@PathParam(value = "id") Long id);
 	
 	@GET
-	@Path("detalle/{key}")
+	@Path("/{key}")
 	@Produces(MediaType.APPLICATION_JSON)
 	List<Equipo> getEquipos(@PathParam(value = "key") String key);	
 
-	@Path("{equipo}")
-	@Produces(MediaType.APPLICATION_JSON)
-	List<Equipo> getJugadoresEquipoPorNombre(@PathParam(value = "equipo") String nombre);
+//	@Path("{equipo}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	List<Equipo> getJugadoresEquipoPorNombre(@PathParam(value = "equipo") String nombre);
 	
 }

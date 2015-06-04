@@ -25,13 +25,15 @@ public class DataProvider {
 	private void initData() {
 		
 		Equipo e1 = createEquipo((long)1,"Peniarol", "/images/equipos/1.jpg", LocalDateTime.of(1913, 12, 15, 5, 15).toString());
-		Equipo e2 = createEquipo((long)2,"Nacional", "/images/equipos/2.jpg", LocalDateTime.of(1899, 12, 15, 5, 15).toString());
+		Equipo e2 = createEquipo((long)2,"Naciomal", "/images/equipos/2.jpg", LocalDateTime.of(1899, 12, 15, 5, 15).toString());
 		Equipo e3 = createEquipo((long)3,"Cerro", "/images/equipos/3.jpg", LocalDateTime.of(1922, 12, 15, 5, 15).toString());
 		Equipo e4 = createEquipo((long)4,"Defensor", "/images/equipos/4.jpg", LocalDateTime.of(1913, 3, 15, 5, 15).toString());
+		Equipo e5 = createEquipo((long)5,"Defensa y Justicia", "/images/equipos/5.jpg", LocalDateTime.of(1500, 6, 3, 2, 22).toString());
+		Equipo e6 = createEquipo((long)6,"Torken", "/images/equipos/6.jpg", LocalDateTime.of(1300, 7, 7, 2, 7).toString());
 		
 		long generatedJugadorId = 0L;
 		
-		List<Equipo> equipos = Arrays.asList(e1,e2,e3,e4);
+		List<Equipo> equipos = Arrays.asList(e1, e2, e3, e4, e5, e6);
 		
 		this.posicionesJugadoresSistema = generarPosiciones();
 		
