@@ -28,5 +28,9 @@ public interface EquipoService {
 	@Path("detalle/{key}")
 	@Produces(MediaType.APPLICATION_JSON)
 	List<Equipo> getEquipos(@PathParam(value = "key") String key);	
+
+	@Path("{equipo}")
+	@Produces(MediaType.APPLICATION_JSON)
+	List<Equipo> getJugadoresEquipoPorNombre(@PathParam(value = "equipo") String nombre);
 	
 }

@@ -1,6 +1,7 @@
 package uy.com.jatrik.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,30 +14,35 @@ public class Jugador implements Serializable{
 	private String nombre;
 	private Integer edad;
 	private String fechaNacimiento;
-	//private Equipo equipo;
 	private String nacionalidad;
-	
-	private Integer ataque;
-	private Integer defensa;
-	private Integer porteria;
+	private String posicion;
+	private String urlImagen;
 	
 	private Integer goles;
 	private Integer rojas;
 	private Integer faltas;
 	private Integer amarillas;
 
-	public Jugador(String nombre, int edad, String fechaNacimiento, /*Equipo equipo,*/ String nacionalidad) {
+	public Jugador(Long id, String nombre, String nacionalidad, String posicion, String urlImagen) {
 		this.nombre = nombre;
-		this.edad = edad;
-		this.fechaNacimiento = fechaNacimiento;
-		//this.equipo = equipo;
 		this.nacionalidad = nacionalidad;
+		this.posicion = posicion;
+		this.id = id;
+		this.urlImagen = urlImagen;
 	}
 	
 	public Jugador() { 
 		
 	}
 	
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -71,29 +77,13 @@ public class Jugador implements Serializable{
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-//	public Equipo getEquipo() {
-//		return equipo;
-//	}
-//	public void setEquipo(Equipo equipo) {
-//		this.equipo = equipo;
-//	}
-	public Integer getAtaque() {
-		return ataque;
+
+	public String getPosicion() {
+		return posicion;
 	}
-	public void setAtaque(Integer ataque) {
-		this.ataque = ataque;
-	}
-	public Integer getDefensa() {
-		return defensa;
-	}
-	public void setDefensa(Integer defensa) {
-		this.defensa = defensa;
-	}
-	public Integer getPorteria() {
-		return porteria;
-	}
-	public void setPorteria(Integer porteria) {
-		this.porteria = porteria;
+	
+	public void setPosicion(String posicion) {
+		this.posicion = posicion;
 	}
 	public Integer getGoles() {
 		return goles;
@@ -120,16 +110,14 @@ public class Jugador implements Serializable{
 		this.amarillas = amarillas;
 	}
 	
-	public void buildEstadisticas(int ataque, int defensa, int porteria, int goles, int rojas, int faltas, int amarillas) {
-		
-		this.ataque = ataque;
-		this.defensa = defensa;
-		this.porteria = porteria;
+	public void buildDatosComplementarios(int goles, int rojas, int faltas, int amarillas, int edad) {
 		
 		this.goles = goles;
 		this.rojas = rojas;
 		this.faltas = faltas;
 		this.amarillas = amarillas;
+		this.edad = edad;
+		this.fechaNacimiento = LocalDateTime.now().minusYears(edad).toString();
 		
 	}
 	

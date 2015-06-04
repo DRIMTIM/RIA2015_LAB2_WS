@@ -5,13 +5,10 @@ import java.util.List;
 
 public class DiccionarioNombres {
 
-	private final static List<String> nombres = Arrays.asList("Pepe", "Diego",
-			"Anthony", "Ignacio", "Roberto", "Rob", "Rodolfo", "Daniel",
-			"Pedro", "Lionel", "Luis", "Dondo", "Mauro");
-	private final static List<String> apellidos = Arrays.asList("Messi",
-			"Davidson", "Kluviert", "Pedrofilo", "Suarez", "Pacheco", "Stark",
-			"Targarien", "Gomez", " Gomeza", "Peruano");
-	
+	private final static List<String> nombres = Arrays.asList("Pepe", "Diego", "Anthony", "Ignacio", "Roberto", "Rob", 
+																"Rodolfo", "Daniel", "Pedro", "Lionel", "Luis", "Dondo", "Mauro", "Luis", "Nacho", "Pedro", "ASCII");
+	private final static List<String> apellidos = Arrays.asList("Messi", "Davidson", "Kluviert", "Pedrofilo", "Suarez", "Pacheco", "Stark", "Targarien",
+																	"Gomez", " Gomeza", "Peruano", "Ronaldinho","Tevez","Rooney","Musulman","Xavi","Ronaldo");
 	public static String randomNombre() {
 		int lastIndex = nombres.size() -1 ;
 		return nombres.get(Dado.tirar(0, lastIndex));
