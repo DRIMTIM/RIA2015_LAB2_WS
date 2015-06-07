@@ -47,12 +47,13 @@
 	    	<div>
 		      	<ul class="nav navbar-nav">
 		        	<li class="active"><a href="consultaEquipos.html">Home</a></li>
-		        	<li><a href="#">Ver Imagenes</a></li>
 		      	</ul>
 		      	<ul class="nav navbar-nav navbar-right">
-		        	<li><a href="consultaEquipos.html"><span id="nombreUsu" class="glyphicon glyphicon-user">&nbsp;</span>
-		        	</a></li>
-		        	<li><a href="consultaEquipos.html"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Salir</a></li>
+		        	<li><a href="consultaEquipos.html">
+		        		<span id="nombreUsu" class="glyphicon glyphicon-user">&nbsp;Bienvenido!</span>
+		        		</a></li>
+		        	<li><a href="consultaEquipos.html"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Salir</a>
+		        	</li>
 		      	</ul>
 		    </div>
 	  	</div>
@@ -78,27 +79,25 @@
 					<h3 class="panel-title">Buscar Equipos</h3>
 				</div>
 
-			</div>
+				<div class="panel-body ingreso">
+					<div class="panel-body loginForm">
 
-			<div class="panel-body ingreso">
+					    <div class="col-xs-10">
+							<input id="searchKey" class="form-control" type="text" 
+								placeholder="Nombre de Equipo" name="nomEquipo">
+					    </div>
+											
+						<button id="btnSearch" type="submit" class="btn btn-success">
+							<span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Buscar!
+						</button>
 
-				<div class="panel-body loginForm">
-
-				    <div class="col-xs-10">
-						<input id="searchKey" class="form-control" type="text" 
-							placeholder="Nombre de Equipo" name="nomEquipo">
-				    </div>
-										
-					<button id="btnSearch" type="submit" class="btn btn-success">
-						<span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Buscar!
-					</button>
-
-				</div>
-					
-
+					</div>	
+				</div>				
 			</div>			
 			
 		</div>
+
+		<br/>
 
 		<div id="formVer">
 			<div class="panel panel-success">

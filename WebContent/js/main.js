@@ -1,8 +1,6 @@
 // The root URL for the RESTful services
 var rootURL = "http://localhost:8080/jatrik-reloaded/rest/equipos";
 
-var currentWine;
-
 // Retrieve wine list when application starts 
 findAll();
 
