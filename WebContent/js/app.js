@@ -279,4 +279,53 @@
     		aleat = Math.round(aleat);
     		return parseInt(inferior) + aleat;
 		};
+		/*Funciones Diegosincas*/
+		
+		function getJugadoresEquipo(equipo) {
+			var id= equipo.id;
+		}
+		
+		function mostrarModal(source) {
+			var id = source.getAttribute('data-identity');
+			findByIdCallback(id, printListJugadores);
+			$('#modal-contenedor-jugadores').modal('show');
+		}
+		
+		function actualizarDetalleJugador(jugador) {
+			
+			$("#nombre-jugador").text('');
+			$("#posicion-jugador").text('');
+			$("#edad-jugador").text('');
+			$("#fecha-nacimiento-jugador").text('');
+			$("#nacionalidad-jugador").text('');
+			
+			$("#nombre-jugador").text(jugador.nombre);
+			$("#posicion-jugador").text(jugador.posicion);
+			$("#edad-jugador").text(jugador.edad);
+			$("#fecha-nacimiento-jugador").text(formatFecha(jugador.fechaNacimiento));
+			$("#nacionalidad-jugador").text(jugador.nacionalidad);
+		}
+
+		function printListJugadores(data) {
+			var divListJugadores = $('#ul-list-jugadores');
+			for(i=0; i<data.jugador.length; i++) {
+				var element = document.createElement("li");
+				element.setAttribute("class", "list-group-item");
+				element.setAttribute("id", data.jugador[i].id);
+				element.textContent = data.jugador[i].nombre;
+				//divListJugadores.append('<li data-identity="' + data.jugador[i].id + '" class="list-group-item"'
+					//	+' onclick="actualizarDetalleJugador('+data.jugador[i]+')">'+data.jugador[i].nombre+'</li>');
+				divListJugadores.append(element);
+
+				//.data(document.body, "data-jugador", data.jugador[i]);
+				//Por jquery guardamos el objeto
+				var createdElement = $('#'+data.jugador[i].id);
+				//Bindeamos el onClick
+				var jugador = data.jugador[i];
+				createdElement.data("jugador",jugador);
+				createdElement.on("click", function() {
+					actualizarDetalleJugador($(this).data("jugador"));
+				});
+			}
+		}
 	

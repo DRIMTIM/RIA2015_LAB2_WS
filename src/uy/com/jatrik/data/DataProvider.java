@@ -56,6 +56,7 @@ public class DataProvider {
 				generatedJugadorId++;
 				cont++;
 			}
+			e.getJugadores().sort((Jugador a, Jugador b) -> a.getPosicion().compareTo(b.getPosicion()));
 			jugadoresSistema.addAll(e.getJugadores());
 		}
 		equiposSistema.addAll(equipos);
