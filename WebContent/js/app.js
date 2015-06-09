@@ -291,7 +291,12 @@
 			$('#modal-contenedor-jugadores').modal('show');
 		}
 		
-		function actualizarDetalleJugador(jugador) {
+		function actualizarDetalleJugador(_this) {
+			
+			var jugador = _this.data("jugador");
+			var selectedItem = $("#modal-contenedor-jugadores").find(".list-group-item active");
+			selectedItem.attr("class", "list-group-item");
+			_this.attr("class", "list-group-item active");
 			
 			$("#nombre-jugador").text('');
 			$("#posicion-jugador").text('');
@@ -324,7 +329,7 @@
 				var jugador = data.jugador[i];
 				createdElement.data("jugador",jugador);
 				createdElement.on("click", function() {
-					actualizarDetalleJugador($(this).data("jugador"));
+					actualizarDetalleJugador($(this));
 				});
 			}
 		}
