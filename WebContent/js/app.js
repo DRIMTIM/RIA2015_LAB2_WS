@@ -1,6 +1,7 @@
 		var imagenCargada = null;
 		var imagenesCargadas = new Array();	
 		var active = false;
+		var selectedItemListaJugadores = null;
 
    		$('[data-toggle="tooltip"]').tooltip();
 
@@ -294,43 +295,56 @@
 		function actualizarDetalleJugador(_this) {
 			
 			var jugador = _this.data("jugador");
-			var selectedItem = $("#modal-contenedor-jugadores").find(".list-group-item active");
-			selectedItem.attr("class", "list-group-item");
+			if(selectedItemListaJugadores != null) {
+				selectedItemListaJugadores.attr("class", "list-group-item ");
+			}
 			_this.attr("class", "list-group-item active");
-			
+			selectedItemListaJugadores = _this;
 			$("#nombre-jugador").text('');
 			$("#posicion-jugador").text('');
 			$("#edad-jugador").text('');
 			$("#fecha-nacimiento-jugador").text('');
 			$("#nacionalidad-jugador").text('');
+			$("#rojas-jugador").text('');
+			$("#goles-jugador").text('');
+			$("#amarillas-jugador").text('');
+			$("#faltas-jugador").text('');
+			  
 			
 			$("#nombre-jugador").text(jugador.nombre);
 			$("#posicion-jugador").text(jugador.posicion);
 			$("#edad-jugador").text(jugador.edad);
 			$("#fecha-nacimiento-jugador").text(formatFecha(jugador.fechaNacimiento));
 			$("#nacionalidad-jugador").text(jugador.nacionalidad);
+			$("#rojas-jugador").text(jugador.rojas);
+			$("#goles-jugador").text(jugador.goles);
+			$("#amarillas-jugador").text(jugador.amarillas);
+			$("#faltas-jugador").text(jugador.faltas);
 		}
 
 		function printListJugadores(data) {
 			var divListJugadores = $('#ul-list-jugadores');
+			var firstElement = null;
+			divListJugadores.html('');
 			for(i=0; i<data.jugador.length; i++) {
 				var element = document.createElement("li");
 				element.setAttribute("class", "list-group-item");
 				element.setAttribute("id", data.jugador[i].id);
 				element.textContent = data.jugador[i].nombre;
-				//divListJugadores.append('<li data-identity="' + data.jugador[i].id + '" class="list-group-item"'
-					//	+' onclick="actualizarDetalleJugador('+data.jugador[i]+')">'+data.jugador[i].nombre+'</li>');
 				divListJugadores.append(element);
-
-				//.data(document.body, "data-jugador", data.jugador[i]);
 				//Por jquery guardamos el objeto
 				var createdElement = $('#'+data.jugador[i].id);
-				//Bindeamos el onClick
+
 				var jugador = data.jugador[i];
 				createdElement.data("jugador",jugador);
+				createdElement.css("cursor", "pointer");
+				//Bindeamos el onClick
 				createdElement.on("click", function() {
 					actualizarDetalleJugador($(this));
 				});
+				if(i==0)
+					firstElement = createdElement;
 			}
+			firstElement.click();
 		}
 	
