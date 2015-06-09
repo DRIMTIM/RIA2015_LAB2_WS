@@ -70,6 +70,19 @@ function findById(id) {
 	});
 }
 
+function findByIdCallback(id, callback) {
+	console.log('findByIdCallback: ' + id);
+	$.ajax({
+		type: 'GET',
+		url: rootURL + '/detalle/' + id,
+		dataType: "json",
+		success: function(data){
+			console.log('findById success: ' + data.name);
+			callback(data);
+		}
+	});
+}
+
 function renderList(data) {
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
 	var list = data;
@@ -93,7 +106,7 @@ function renderList(data) {
 			console.log(e);
 			formatFecha(e.fechaCreacion);
 			$('#tblEquipos')
-				.append('<tr><td><a href="#" data-identity="' + e.id + '">' + e.nombre + '</a></td>'
+				.append('<tr><td><a href="#" onclick="mostrarModal(this);" data-identity="' + e.id + '">' + e.nombre + '</a></td>'
 						+ '<td>' + formatFecha(e.fechaCreacion) + '</td><td>' + e.jugadores.length + '</td></tr>');
 		});
 	}else{
