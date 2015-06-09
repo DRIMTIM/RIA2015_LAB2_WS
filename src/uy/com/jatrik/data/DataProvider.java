@@ -197,20 +197,8 @@ public class DataProvider {
 	            imageDataString = encodeImage(imageData);
 	            
 	            System.out.println(imageDataString);
-	 
-	            // Converting a Base64 String into Image byte array
-	            byte[] imageByteArray = decodeImage(imageDataString);
-	 
-	            // Write a image byte array into file system
-	            FileOutputStream imageOutFile = new FileOutputStream(
-	                    "/home/pelubook/Escritorio/water-drop-after-convert.jpg");
-	 
-	            imageOutFile.write(imageByteArray);
-	 
-	            imageInFile.close();
-	            imageOutFile.close();
-	 
 	            System.out.println("Image Successfully Manipulated!");
+	            
 	        } catch (FileNotFoundException e) {
 	            System.out.println("Image not found" + e);
 	        } catch (IOException ioe) {
