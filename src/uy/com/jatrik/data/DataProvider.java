@@ -56,7 +56,7 @@ public class DataProvider {
 				}
 				
 				String posicion = posicionesJugadoresSistema.get(cont);
-				String urlImagen = DIR + File.separator + "jugadores" + File.separator + cont + ".jpg";
+				String urlImagen = DIR + File.separator + "jugadores" + File.separator + Dado.tirar(0,11) + ".jpg";
 				
 				e.addJugador(createJugador(generatedJugadorId, DiccionarioNombres.randomNombre() + " " + DiccionarioNombres.randomApellido(), 
 							 	e, posicion, getBase64Image(urlImagen)));
@@ -100,7 +100,7 @@ public class DataProvider {
 		
 		List<String> result = new ArrayList<>();
 
-		result.add("PosicionJugador.PORTERO");
+		result.add("Portero");
 		result.add("Defensor");
 		result.add("Defensor");
 		result.add("Defensor");
