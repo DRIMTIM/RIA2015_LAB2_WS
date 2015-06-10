@@ -309,7 +309,7 @@
 			$("#goles-jugador").text('');
 			$("#amarillas-jugador").text('');
 			$("#faltas-jugador").text('');
-			  
+			$("#imagen-jugador").attr("src", "");
 			
 			$("#nombre-jugador").text(jugador.nombre);
 			$("#posicion-jugador").text(jugador.posicion);
@@ -320,6 +320,7 @@
 			$("#goles-jugador").text(jugador.goles);
 			$("#amarillas-jugador").text(jugador.amarillas);
 			$("#faltas-jugador").text(jugador.faltas);
+			$("#imagen-jugador").attr("src", "data:image/jpeg;charset=utf-8;base64, "+jugador.urlImagen);
 		}
 
 		function printListJugadores(data) {
