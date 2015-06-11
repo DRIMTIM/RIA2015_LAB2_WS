@@ -22,7 +22,7 @@ public class DataProvider {
 	private List<String> posicionesJugadoresSistema;
 	private static DataProvider instance;
 	//Chanchullo...
-	private final static String DIR = DataProvider.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6).replace("DataProvider.class", "images"+File.separator+"equipos"+File.separator);
+	private final static String DIR = DataProvider.class.getProtectionDomain().getCodeSource().getLocation().getPath().replace("DataProvider.class", "images"+File.separator+"equipos"+File.separator);
 	
 	private DataProvider() {
 		equiposSistema = new ArrayList<>();
@@ -39,7 +39,7 @@ public class DataProvider {
 		Equipo e6 = createEquipo((long)6,"Torken", getBase64Image(DIR+"06.jpeg"), LocalDateTime.of(1300, 7, 7, 2, 7).toString());
 		
 		long generatedJugadorId = 0L;
-		
+
 		List<Equipo> equipos = Arrays.asList(e1, e2, e3, e4, e5, e6);
 		
 		this.posicionesJugadoresSistema = generarPosiciones();
