@@ -3,7 +3,6 @@ package uy.com.jatrik.data;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -185,7 +184,8 @@ public class DataProvider {
 	
 	public String getBase64Image(String ruta) {
 
-	       File file = new File("/home/pelubook/workspace/RIA2015_LAB2_WS/src/uy/com/jatrik/data/images/equipos/01.jpeg");
+	       File file = new File("/home/pelubook/workspace/RIA2015_LAB2_WS/"
+	       							+ "src/uy/com/jatrik/data/images/equipos/01.jpeg");
 	       String imageDataString = null;
 	       
 	        try {            
@@ -193,17 +193,19 @@ public class DataProvider {
 	            FileInputStream imageInFile = new FileInputStream(file);
 	            byte imageData[] = new byte[(int) file.length()];
 	            imageInFile.read(imageData);
-	 
+	            
 	            // Converting Image byte array into Base64 String
 	            imageDataString = encodeImage(imageData);
 	            
 	            System.out.println(imageDataString);
-	            System.out.println("Image Successfully Manipulated!");
+	            System.out.println("[DRIMTIM-INFO] - Image Successfully Manipulated!");
+	            
+	            imageInFile.close();
 	            
 	        } catch (FileNotFoundException e) {
-	            System.out.println("Image not found" + e);
+	            System.out.println("[DRIMTIM-ERROR] - Image not found " + e);
 	        } catch (IOException ioe) {
-	            System.out.println("Exception while reading the Image " + ioe);
+	            System.out.println("[DRIMTIM-ERROR] - Exception while reading the Image " + ioe);
 	        }
 	        
 	        return imageDataString;
