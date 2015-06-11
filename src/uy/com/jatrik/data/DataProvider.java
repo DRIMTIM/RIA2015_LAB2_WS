@@ -180,15 +180,14 @@ public class DataProvider {
 		
 	}	
 	
-	public String getBase64Image(String path) {
+	public String getBase64Image(String ruta) {
 
-	       File file = new File(path);
+	       File file = new File(ruta);
 	       String imageDataString = null;
 	       
 	        try {            
 	            // Reading a Image file from file system
-	            @SuppressWarnings("resource")
-				FileInputStream imageInFile = new FileInputStream(file);
+	            FileInputStream imageInFile = new FileInputStream(file);
 	            byte imageData[] = new byte[(int) file.length()];
 	            imageInFile.read(imageData);
 	 
@@ -196,12 +195,14 @@ public class DataProvider {
 	            imageDataString = encodeImage(imageData);
 	            
 	            System.out.println(imageDataString);
-	            System.out.println("Image Successfully Manipulated!");
+	            System.out.println("[DRIMTIM-INFO] - Image Successfully Manipulated!");
+	            
+	            imageInFile.close();
 	            
 	        } catch (FileNotFoundException e) {
-	            System.out.println("Image not found" + e);
+	        	System.out.println("[DRIMTIM-ERROR] - Image not found " + e);
 	        } catch (IOException ioe) {
-	            System.out.println("Exception while reading the Image " + ioe);
+	        	System.out.println("[DRIMTIM-ERROR] - Exception while reading the Image " + ioe);
 	        }
 	        
 	        return imageDataString;
