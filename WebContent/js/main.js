@@ -104,10 +104,14 @@ function renderList(data) {
 		$.each(list.equipo, function(index, e) {
 			console.log("Equipo " + index +": ");
 			console.log(e);
-			formatFecha(e.fechaCreacion);
+			var img = "<img src='data:image/jpeg;base64,";
 			$('#tblEquipos')
-				.append('<tr><td><a href="#" onclick="mostrarModal(this);" data-identity="' + e.id + '">' + e.nombre + '</a></td>'
+				.append('<tr><td><a class="btn" onclick="mostrarModal(this);" data-trigger="hover" rel="popover" id="equipo' + e.id + '"'
+						+ ' href="#" >' + e.nombre + '</a></td>'
 						+ '<td>' + formatFecha(e.fechaCreacion) + '</td><td>' + e.jugadores.length + '</td></tr>');
+
+				img = img + e.urlImage + "'/>";
+				$('#equipo' + e.id).popover({ title: e.nombre, content: img, html: true, placement: "left"});
 		});
 	}else{
 
@@ -116,7 +120,7 @@ function renderList(data) {
 			console.log(e);
 			$('#tblEquipos')
 				.append('<tr><td><a href="#" data-identity="' + e.id + '">' + e.nombre + '</a></td>'
-						+ '<td>' + e.fechaCreacion + '</td><td>' + e.jugadores.length + '</td></tr>');
+						+ '<td>' + formatFecha(e.fechaCreacion) + '</td><td>' + e.jugadores.length + '</td></tr>');
 		});
 
 	}
@@ -154,7 +158,6 @@ function formatFecha(fecha){
 
 	var fechaHora = fecha.split("T");
 	var f = fechaHora[0].split("-");
-	var fechaRet = f[2] + '/' + f[1] + '/' + f[0];
-	return fechaRet;
+	return f[2] + '/' + f[1] + '/' + f[0];
 
 }

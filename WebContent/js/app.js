@@ -231,31 +231,6 @@
 		    	}
 			  }
 			});
-		}
-
-		function guardarImagen(){
-			var tituloImagen = $("#tituloImagen").val();
-			var descripcionImagen = $("#descripcionImagen").val();
-			if(imagenCargada != null && imagenCargada != "" && imagenCargada != undefined){
-				if(tituloImagen != null && tituloImagen != "" && tituloImagen != undefined){
-					if(descripcionImagen != null && descripcionImagen != "" && descripcionImagen != undefined){
-						mostrarConfirmacion("Confirmación", "Esta seguro que desea guardar la imagen?", function (){
-							var imagen = new Object();
-							imagen.archivo = imagenCargada;
-							imagen.titulo = tituloImagen;
-							imagen.descripcion = descripcionImagen;
-							imagenesCargadas[imagenesCargadas.length] = imagen;
-							limpiarCampos();
-						});
-					}else{
-						mostrarError("Debe ingresar una descripción!");
-					}
-				}else{
-					mostrarError("Debe ingresar un titulo!");
-				}
-			}else{
-				mostrarError("Debe seleccionar una imagen!");
-			}		
 		}		
 
 		function limpiarCampos(){
@@ -265,10 +240,6 @@
 			$("#miniatura").attr("src", "../images/upload.png");
 			$(":file").filestyle('clear');
 		}
- 
-		/*$("#archivoImagen").change(function(){
- 			cargarImagen(event);
-		});*/
 
 		$("#btnSubirImg").click(function(){
 			guardarImagen();
