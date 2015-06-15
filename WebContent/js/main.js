@@ -62,8 +62,7 @@ function findById(id) {
 		url: rootURL + '/' + id,
 		dataType: "json",
 		success: function(data){
-			$('#btnDelete').show();
-			console.log('findById success: ' + data.name);
+			console.log('findById success: ' + data.nombre);
 			currentWine = data;
 			renderDetails(currentWine);
 		}
@@ -88,6 +87,7 @@ function renderList(data) {
 	var list = data;
 	console.log("Lista de Equipos: ");
 	console.log(list);
+	$('#error').hide();
 
 	var tableFormat = 	"<thead>" +
 					      	"<tr>" +
@@ -99,29 +99,40 @@ function renderList(data) {
 					    "<tbody></tbody>";
 
 	$('#tblEquipos').html(tableFormat);
+	var img = "<img src='data:image/jpeg;base64,";
 
 	if(list.equipo.length > 1){
+		$('#error').hide();
 		$.each(list.equipo, function(index, e) {
 			console.log("Equipo " + index +": ");
 			console.log(e);
-			var img = "<img src='data:image/jpeg;base64,";
+			img = "<img src='data:image/jpeg;base64,";
 			$('#tblEquipos')
-				.append('<tr><td><a class="btn" onclick="mostrarModal(this);" data-trigger="hover" rel="popover" id="equipo' + e.id + '"'
-						+ ' href="#" >' + e.nombre + '</a></td>'
-						+ '<td>' + formatFecha(e.fechaCreacion) + '</td><td>' + e.jugadores.length + '</td></tr>');
+				.append('<tr><td><a class="btn" onclick="mostrarModal(this);" data-trigger="hover" '
+					    + 'rel="popover" id="equipo' + e.id + '"' + 'data-identity="' + e.id + '" '
+						+ 'href="#" >' + e.nombre + '</a></td>'
+						+ '<td>' + formatFecha(e.fechaCreacion) + '</td><td>' + e.jugadores.length 
+						+ '</td></tr>');
 
 				img = img + e.urlImage + "'/>";
 				$('#equipo' + e.id).popover({ title: e.nombre, content: img, html: true, placement: "left"});
 		});
+	}else if(typeof(list) == 'object'){
+			var e = list.equipo;
+			$('#tblEquipos')
+				.append('<tr><td><a class="btn" onclick="mostrarModal(this);" data-trigger="hover" '
+					    + 'rel="popover" id="equipo' + e.id + '"' + 'data-identity="' + e.id + '" '
+						+ 'href="#" >' + e.nombre + '</a></td>'
+						+ '<td>' + formatFecha(e.fechaCreacion) + '</td><td>' + e.jugadores.length 
+						+ '</td></tr>');
+
+				img = img + e.urlImage + "'/>";
+				$('#equipo' + e.id).popover({ title: e.nombre, content: img, html: true, placement: "left"});
+
 	}else{
 
-		$.each(list, function(index, e) {
-			console.log("Equipo " + index +": ");
-			console.log(e);
-			$('#tblEquipos')
-				.append('<tr><td><a href="#" data-identity="' + e.id + '">' + e.nombre + '</a></td>'
-						+ '<td>' + formatFecha(e.fechaCreacion) + '</td><td>' + e.jugadores.length + '</td></tr>');
-		});
+		$('#tblEquipos').html(null);
+		$('#error').show();
 
 	}
 

@@ -1,7 +1,7 @@
 		var imagenCargada = null;
 		var imagenesCargadas = new Array();	
 		var active = false;
-		var selectedItemListaJugadores = null;
+		var selectedItemListaJugadores = null;		
 
    		$('[data-toggle="tooltip"]').tooltip();
 
@@ -27,56 +27,6 @@
 		      		callback: function() {}
 		    	}
 			  }
-			});
-		}
-
-		function mostrarImagen3(titulo, imagen, descripcion){
-			modal({
-				type: 'inverted', //Type of Modal Box (alert | confirm | prompt | success | warning | error | info 
-					//| inverted | primary)
-				title: titulo, //Modal Title
-				text: "<div><img src='" + imagen + "' class='img-thumbnail' width='900' height='750'/><h4>" 
-												+ descripcion + "</h4></div>", //Modal HTML Content
-				size: 'normal', //Modal Size (normal | large | small)
-				/*buttons: [{
-					text: 'Aceptar', //Button Text
-					val: 'ok', //Button Value
-					eKey: true, //Enter Keypress
-					addClass: 'btn-light-blue', //Button Classes (btn-large | btn-small | btn-green | btn-light-green 
-					//| btn-purple | btn-orange | btn-pink | btn-turquoise | btn-blue | btn-light-blue | btn-light-red 
-					//| btn-red | btn-yellow | btn-white | btn-black | btn-rounded | btn-circle | btn-square | btn-disabled)
-
-					onClick: function(argument) {
-						console.log(argument);
-						testing();
-					}
-				}, ],*/
-				center: true, //Center Modal Box?
-				autoclose: false, //Auto Close Modal Box?
-				callback: null, //Callback Function after close Modal (ex: function(result){alert(result);})
-				onShow: function(r) {}, //After show Modal function
-				closeClick: true, //Close Modal on click near the box
-				closable: true, //If Modal is closable
-				theme: 'atlant', //Modal Custom Theme
-				animate: false, //Slide animation
-				background: 'rgba(0,0,0,0.35)', //Background Color, it can be null
-				zIndex: 1050, //z-index
-				/*buttonText: {
-					ok: 'Aceptar',
-					yes: 'Yes',
-					cancel: 'Cancel'
-				},*/
-				template: '<div class="modal-box"><div class="modal-inner"><div class="modal-title">' +
-							'<a class="modal-close-btn"></a></div><div class="modal-text"></div>' +
-							'<div class="modal-buttons"></div></div></div>',
-				_classes: {
-					box: '.modal-box',
-					boxInner: ".modal-inner",
-					title: '.modal-title',
-					content: '.modal-text',
-					buttons: '.modal-buttons',
-					closebtn: '.modal-close-btn'
-				}
 			});
 		}
 
@@ -113,89 +63,6 @@
 				mostrarImagenesCargadas();
 			}
 
-		}
-
-		function cargarItemListaImagenes(indice, titulo, imagen, descripcion){
-
-			var lista = "";
-			itemLista = "<li id='itemList_" + indice + "' class='list-group-item' >" +
-								"<div class='panel-group' >" +
-									"<div id='itemListImg_" + indice + "' style='display: inline;'>" + 	
-										"<img id='itemImg_" + indice + "'" +
-										"src='" + imagen + "' class='img-thumbnail imagen' >" +
-									"</div>" +
-									"<div id='itemListData_" + indice + "' style='display: inline;'>" + 
-										"<h3 style='display: inline;'> " + titulo + " </h3>" +
-										"<p style='display: inline;'> { " + descripcion + " } </p>" +
-									"</div>" +
-								"</div>" +		
-							"</li>";
-
-			$('#listaImagenes').append(itemLista);			
-
-			var obj = $("#itemImg_" + indice);
-			obj.on("click", {titulo : titulo, imagen : imagen, descripcion: descripcion}, function(event) {
-				mostrarImagen3(event.data.titulo,event.data.imagen,event.data.descripcion);
-			});
-
-		}
-
-		function mostrarImagenesCargadas(){
-
-			$("#myCarousel").show();
-			$(".carousel-inner").html(null);
-			$('.carousel-indicators').html(null);
-			$('#listaImagenes').html(null);
-
-			if(imagenesCargadas.length > 0){
-				$("#sinImagenes").hide();
-				var indicator = "";
-				var item = "";
-
-				for(var i = 0; i < imagenesCargadas.length; i++){
-					var titulo = imagenesCargadas[i].titulo;
-					var imagen = imagenesCargadas[i].archivo;
-					var descripcion = imagenesCargadas[i].descripcion;
-
-					if(i == 0){
-						item = "<div class='item active'>" +
-						        "<img id='item_" + i + "'" + "class='img-rounded img-thumbnail' src='" + imagen 
-						        + "'" + "alt='" + titulo + "'" 
-						        + "width='500' height='350'>" + "<div class='carousel-caption'>" +
-						        	"<h3>" + titulo + "</h3>" + 
-						        	"<p>" + descripcion + "</p>" +
-						        "</div>" +
-						    "</div>";
-
-						indicator = "<li data-target='#myCarousel' data-slide-to='" + i + "'" + "class='active'></li>";
-
-					}else{
-
-						item = "<div class='item'>" +
-						        "<img id='item_" + i + "'" + "class='img-rounded img-thumbnail' src='" + imagen + "'" 
-						        + "alt='" + titulo + "'" 
-						        + "width='500' height='350'>" + "<div class='carousel-caption'>" +
-						        	"<h3>" + titulo + "</h3>" + 
-						        	"<p>" + descripcion + "</p>" +
-						        "</div>" +
-						    "</div>";
-
-						indicator = "<li data-target='#myCarousel' data-slide-to='" + i + "'" + "></li>";
-
-					}		
-
-					cargarItemListaImagenes(i, titulo, imagen, descripcion);
-
-					$('.carousel-indicators').append(indicator);
-					$('.carousel-inner').append(item);
-
-					item = null;				
-
-				}
-			}else{
-				$("#sinImagenes").show();
-				$("#myCarousel").hide();
-			}
 		}	
 		
 		function mostrarConfirmacion(titulo, mensaje, funcionAceptar){

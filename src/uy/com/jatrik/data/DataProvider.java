@@ -34,9 +34,9 @@ public class DataProvider {
 		Equipo e1 = createEquipo((long)1,"Peniarol", getBase64Image(DIR+"01.jpeg"), LocalDateTime.of(1913, 12, 15, 5, 15).toString());
 		Equipo e2 = createEquipo((long)2,"Naciomal", getBase64Image(DIR+"02.jpeg"), LocalDateTime.of(1899, 12, 15, 5, 15).toString());
 		Equipo e3 = createEquipo((long)3,"Cerro", getBase64Image(DIR+"03.jpeg"), LocalDateTime.of(1922, 12, 15, 5, 15).toString());
-		Equipo e4 = createEquipo((long)4,"Defensor", getBase64Image(DIR+"04.jpeg"), LocalDateTime.of(1913, 3, 15, 5, 15).toString());
+		Equipo e4 = createEquipo((long)4,"Defensor", getBase64Image(DIR+"11.jpeg"), LocalDateTime.of(1913, 3, 15, 5, 15).toString());
 		Equipo e5 = createEquipo((long)5,"Defensa y Justicia", getBase64Image(DIR+"05.jpeg"), LocalDateTime.of(1500, 6, 3, 2, 22).toString());
-		Equipo e6 = createEquipo((long)6,"Torken", getBase64Image(DIR+"06.jpeg"), LocalDateTime.of(1300, 7, 7, 2, 7).toString());
+		Equipo e6 = createEquipo((long)6,"Torken", getBase64Image(DIR+"08.jpeg"), LocalDateTime.of(1300, 7, 7, 2, 7).toString());
 		
 		long generatedJugadorId = 0L;
 
@@ -168,7 +168,8 @@ public class DataProvider {
 		
 		for(Equipo e : equiposSistema){
 			
-			if(e.getNombre().contains(nomFinal)){
+			if(e.getNombre().toLowerCase()
+					.contains(nomFinal.toLowerCase())){
 				
 				equipos.add(e);
 				
