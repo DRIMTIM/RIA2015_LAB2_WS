@@ -23,10 +23,10 @@ $('#searchKey').keypress(function(e){
 });
 
 // Replace broken images with generic wine bottle
-$("img").error(function(){
-  $(this).attr("src", "pics/generic.jpg");
+//$("img").error(function(){
+//  $(this).attr("src", "pics/generic.jpg");
 
-});
+//});
 
 function search(searchKey) {
 	if (searchKey == '') 
@@ -101,7 +101,12 @@ function renderList(data) {
 	$('#tblEquipos').html(tableFormat);
 	var img = "<img src='data:image/jpeg;base64,";
 
-	if(list.equipo.length > 1){
+	if(list == null){
+
+		$('#tblEquipos').html(null);
+		$('#error').show();
+
+	}else if(list.equipo.length > 1){
 		$('#error').hide();
 		$.each(list.equipo, function(index, e) {
 			console.log("Equipo " + index +": ");
@@ -128,11 +133,6 @@ function renderList(data) {
 
 				img = img + e.urlImage + "'/>";
 				$('#equipo' + e.id).popover({ title: e.nombre, content: img, html: true, placement: "left"});
-
-	}else{
-
-		$('#tblEquipos').html(null);
-		$('#error').show();
 
 	}
 
